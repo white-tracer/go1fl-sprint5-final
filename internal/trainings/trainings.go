@@ -22,16 +22,15 @@ type Training struct {
 func (t *Training) Parse(datastring string) (err error) {
 	parsedData := strings.Split(datastring, ",")
 	if len(parsedData) != 3 {
-		return errors.New("Длина слайса не равна трем")
+		return errors.New("error in slice length")
 	}
 
 	t.Steps, err = strconv.Atoi(parsedData[0])
 	if err != nil {
-		err := errors.New("Ошибка при получении количества шагов")
-		return err
+		return fmt.Errorf("conversion error: %w", err)
 	}
 	if t.Steps <= 0 {
-		err := errors.New("Шагов 0 или меньше")
+		err := errors.New("error in steps count: zero or below")
 		return err
 	}
 
@@ -40,11 +39,10 @@ func (t *Training) Parse(datastring string) (err error) {
 
 	t.Duration, err = time.ParseDuration(parsedData[2])
 	if err != nil {
-		err := errors.New("Ошибка при получении длительности тренировки")
-		return err
+		return fmt.Errorf("duration error: %w", err)
 	}
 	if t.Duration <= 0 {
-		err := errors.New("Некорректная длительность тренировки")
+		err := errors.New("incorrect duration")
 		return err
 	}
 	return nil
@@ -72,7 +70,7 @@ func (t Training) ActionInfo() (string, error) {
 		spentCalories = spentCaloriesForWalkTraining
 	}
 	if t.TrainingType != "Бег" && t.TrainingType != "Ходьба" {
-		err := errors.New("Указан неизвестный тип тренировки")
+		err := errors.New("error: unknown training type")
 		return "", err
 	}
 

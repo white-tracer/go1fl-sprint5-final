@@ -1,6 +1,7 @@
 package actioninfo
 
 import (
+	"fmt"
 	"log"
 )
 
@@ -16,6 +17,11 @@ func Info(dataset []string, dp DataParser) {
 			log.Println(err)
 			continue
 		}
-		dp.ActionInfo()
+		trainingInfo, err := dp.ActionInfo()
+		if err != nil {
+			log.Println("error in trainingInfo function:", err)
+			continue
+		}
+		fmt.Println(trainingInfo)
 	}
 }

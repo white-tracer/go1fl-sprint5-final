@@ -16,27 +16,27 @@ const (
 func WalkingSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 
 	if steps <= 0 {
-		err := errors.New("Ошибка функции 'WalkingSpentCalories' - Шаги указаны некорректно")
+		err := errors.New("error in 'WalkingSpentCalories' - steps count incorrect")
 		return 0, err
 	}
 	if weight <= 0 {
-		err := errors.New("Ошибка функции 'WalkingSpentCalories' - Вес указан некорректно")
+		err := errors.New("error in 'WalkingSpentCalories' - weight incorrect")
 		return 0, err
 	}
 
 	if height <= 0 {
-		err := errors.New("Ошибка функции 'WalkingSpentCalories' - Рост указан некорректно")
+		err := errors.New("error in 'WalkingSpentCalories' - height incorrect")
 		return 0, err
 	}
 
 	if duration <= 0 {
-		err := errors.New("Ошибка функции 'WalkingSpentCalories' - Длительность тренировка указана некорректно")
+		err := errors.New("error in 'WalkingSpentCalories' - duration incorrect")
 		return 0, err
 	}
 
 	walkingSpentCalories := (weight * MeanSpeed(steps, height, duration) * float64(duration.Minutes())) / float64(minInH) * walkingCaloriesCoefficient
 	if walkingSpentCalories <= 0 {
-		err := errors.New("Ошибка функции 'WalkingSpentCalories' - Неверный подсчет каллорий")
+		err := errors.New("error in 'WalkingSpentCalories' - incorrect calories calculation")
 		return 0, err
 	}
 	return walkingSpentCalories, nil
@@ -45,27 +45,27 @@ func WalkingSpentCalories(steps int, weight, height float64, duration time.Durat
 func RunningSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 
 	if steps <= 0 {
-		err := errors.New("Ошибка функции 'RunningSpentCalories' - Шаги указаны некорректно")
+		err := errors.New("error in 'RunningSpentCalories' - steps count incorrect")
 		return 0, err
 	}
 	if weight <= 0 {
-		err := errors.New("Ошибка функции 'RunningSpentCalories' - Вес указан некорректно")
+		err := errors.New("error in 'RunningSpentCalories' - weight incorrect")
 		return 0, err
 	}
 
 	if height <= 0 {
-		err := errors.New("Ошибка функции 'RunningSpentCalories' - Рост указан некорректно")
+		err := errors.New("error in 'RunningSpentCalories' - height incorrect")
 		return 0, err
 	}
 
 	if duration <= 0 {
-		err := errors.New("Ошибка функции 'RunningSpentCalories' - Длительность тренировка указана некорректно")
+		err := errors.New("error in 'RunningSpentCalories' - duration incorrect")
 		return 0, err
 	}
 
 	spentCalories := (weight * MeanSpeed(steps, height, duration) * float64(duration.Minutes())) / float64(minInH)
 	if spentCalories <= 0 {
-		err := errors.New("Ошибка функции 'RunningSpentCalories' - Неверный подсчет каллорий")
+		err := errors.New("error in 'RunningSpentCalories' - incorrect calories calculation")
 		return 0, err
 	}
 	return spentCalories, nil
